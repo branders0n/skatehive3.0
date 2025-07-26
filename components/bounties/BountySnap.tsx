@@ -83,6 +83,7 @@ const renderMedia = (mediaContent: string) => {
         <Box
           key={index}
           dangerouslySetInnerHTML={{ __html: item }}
+          suppressHydrationWarning
           sx={{
             iframe: {
               width: "100%",
