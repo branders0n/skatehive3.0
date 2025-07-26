@@ -34,6 +34,7 @@ import { MarkdownProcessor } from "@/lib/markdown/MarkdownProcessor";
 import { EnhancedMarkdownRenderer } from "@/components/markdown/EnhancedMarkdownRenderer";
 import { usePostEdit } from "@/hooks/usePostEdit";
 import ThumbnailPicker from "@/components/compose/ThumbnailPicker";
+import { DEFAULT_VOTE_WEIGHT } from "@/lib/utils/constants";
 
 interface PostDetailsProps {
   post: Discussion;
@@ -47,7 +48,7 @@ export default function PostDetails({
   const { title, author, body, created } = post;
   const postDate = useMemo(() => getPostDate(created), [created]);
   const { aioha, user } = useAioha();
-  const [sliderValue, setSliderValue] = useState(100);
+  const [sliderValue, setSliderValue] = useState(DEFAULT_VOTE_WEIGHT);
   const [showSlider, setShowSlider] = useState(false);
   const [activeVotes, setActiveVotes] = useState(post.active_votes || []);
   const [payoutValue, setPayoutValue] = useState(

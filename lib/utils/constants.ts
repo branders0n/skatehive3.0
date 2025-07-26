@@ -24,3 +24,6 @@ export const SUPABASE = {
   private_key: process.env.SUPABASE_PRIVATE_KEY as string,
 };
 export const PINATA_URL = process.env.NEXT_PUBLIC_PINATA_URL || "ipfs.skatehive.app"; 
+
+// Default vote weight for snaps and posts (percentage)
+export const DEFAULT_VOTE_WEIGHT = 51; 

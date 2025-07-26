@@ -18,6 +18,7 @@ import { LuArrowUpRight } from "react-icons/lu";
 import { useAioha } from "@aioha/react-ui";
 import { Discussion } from "@hiveio/dhive";
 import VoteListPopover from "@/components/blog/VoteListModal";
+import { DEFAULT_VOTE_WEIGHT } from "@/lib/utils/constants";
 
 interface UpvoteButtonProps {
   discussion: Discussion;
@@ -50,7 +51,7 @@ const UpvoteButton = ({
 }: UpvoteButtonProps) => {
   const { aioha, user } = useAioha();
   const toast = useToast();
-  const [sliderValue, setSliderValue] = useState(100);
+  const [sliderValue, setSliderValue] = useState(DEFAULT_VOTE_WEIGHT);
   const [isVoting, setIsVoting] = useState(false);
 
   // Deduplicate votes by voter (keep the last occurrence)
@@ -64,7 +65,7 @@ const UpvoteButton = ({
     if (variant === "withSlider" && setShowSlider) {
       setShowSlider(!showSlider);
     } else if (variant === "simple" || variant === "withVoteCount") {
-      handleVote(100); // Default 100% vote for simple and withVoteCount variants
+      handleVote(DEFAULT_VOTE_WEIGHT); // Use constant for default vote percentage
     }
   };
 

@@ -23,6 +23,7 @@ import MatrixOverlay from "@/components/graphics/MatrixOverlay";
 import { useAioha } from "@aioha/react-ui";
 import useHivePower from "@/hooks/useHivePower";
 import BountyRewarder from "./BountyRewarder";
+import { DEFAULT_VOTE_WEIGHT } from "@/lib/utils/constants";
 
 interface BountyDetailProps {
   post: Discussion;
@@ -51,7 +52,7 @@ const BountyDetail: React.FC<BountyDetailProps> = ({ post }) => {
 
   // Voting state
   const { aioha, user } = useAioha();
-  const [sliderValue, setSliderValue] = useState(100);
+  const [sliderValue, setSliderValue] = useState(DEFAULT_VOTE_WEIGHT);
   const [showSlider, setShowSlider] = useState(false);
   const [activeVotes, setActiveVotes] = useState(post.active_votes || []);
   const [voted, setVoted] = useState(

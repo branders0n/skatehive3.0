@@ -18,6 +18,7 @@ import { LuArrowUpRight } from "react-icons/lu";
 import { useAioha } from "@aioha/react-ui";
 import { Discussion } from "@hiveio/dhive";
 import VoteListPopover from "@/components/blog/VoteListModal";
+import { DEFAULT_VOTE_WEIGHT } from "@/lib/utils/constants";
 
 interface VoteSliderProps {
     discussion: Discussion;
@@ -48,7 +49,7 @@ const VoteSlider = ({
 }: VoteSliderProps) => {
     const { aioha, user } = useAioha();
     const toast = useToast();
-    const [sliderValue, setSliderValue] = useState(100);
+    const [sliderValue, setSliderValue] = useState(DEFAULT_VOTE_WEIGHT);
 
     const handleHeartClick = () => {
         setShowSlider(!showSlider);
