@@ -19,7 +19,10 @@ import UpvoteSnapContainer from "@/components/homepage/UpvoteSnapContainer";
 import { useRive, useStateMachineInput } from "@rive-app/react-canvas";
 import LogoMatrix from "../../components/graphics/LogoMatrix";
 import FarcasterUniversalLink from "@/components/farcaster/FarcasterUniversalLink";
+import VoteWeightSlider from "@/components/settings/VoteWeightSlider";
 import { useAioha } from "@aioha/react-ui";
+import useHiveAccount from "@/hooks/useHiveAccount";
+import useProfileData from "@/hooks/useProfileData";
 
 const Settings = () => {
   const { themeName, setThemeName } = useTheme();
@@ -35,6 +38,10 @@ const Settings = () => {
     }),
     [user]
   );
+
+  // Get user's Hive account and profile data
+  const { hiveAccount } = useHiveAccount(userData.hiveUsername || "");
+  const { profileData } = useProfileData(userData.hiveUsername || "", hiveAccount);
 
   // Rive animation setup
   const STATE_MACHINE_NAME = "ButtonStateMachine"; // Update if your state machine is named differently
@@ -150,6 +157,16 @@ const Settings = () => {
                 hiveUsername={userData.hiveUsername}
                 postingKey={userData.postingKey}
               />
+              
+              {/* Vote Weight Slider */}
+              <VoteWeightSlider
+                username={userData.hiveUsername}
+                currentVoteWeight={profileData.vote_weight || 51}
+                onVoteWeightUpdate={(voteWeight) => {
+                  console.log("Vote weight updated:", voteWeight);
+                }}
+              />
+              
               <Box
                 bg="background"
                 border="1px solid"

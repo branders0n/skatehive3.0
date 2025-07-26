@@ -46,6 +46,7 @@ export interface ProfileData {
   about: string;
   ethereum_address?: string;
   video_parts?: VideoPart[];
+  vote_weight?: number;
 }
 
 export default function ProfilePage({ username }: ProfilePageProps) {

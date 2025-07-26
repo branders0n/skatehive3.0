@@ -21,6 +21,7 @@ export default function useProfileData(username: string, hiveAccount: HiveAccoun
         about: "",
         ethereum_address: "",
         video_parts: [],
+        vote_weight: 51, // Default vote weight
     });
 
     const updateProfileData = useCallback((newData: Partial<ProfileData>) => {
@@ -36,6 +37,7 @@ export default function useProfileData(username: string, hiveAccount: HiveAccoun
                 let website = "";
                 let ethereum_address = "";
                 let video_parts: VideoPart[] = [];
+                let vote_weight = 51;
 
                 if (hiveAccount?.posting_json_metadata) {
                     try {
@@ -54,6 +56,7 @@ export default function useProfileData(username: string, hiveAccount: HiveAccoun
                         const parsedMetadata = JSON.parse(hiveAccount.json_metadata);
                         ethereum_address = parsedMetadata?.extensions?.eth_address || "";
                         video_parts = parsedMetadata?.extensions?.video_parts || [];
+                        vote_weight = parsedMetadata?.extensions?.vote_weight || 51;
                     } catch (err) {
                         console.error("Failed to parse json_metadata", err);
                     }
@@ -70,6 +73,7 @@ export default function useProfileData(username: string, hiveAccount: HiveAccoun
                     about: profileInfo?.metadata?.profile?.about || "",
                     ethereum_address: ethereum_address,
                     video_parts: video_parts,
+                    vote_weight: vote_weight,
                 });
             } catch (err) {
                 console.error("Failed to fetch profile info", err);
