@@ -6,7 +6,7 @@ import {
 } from "@/hooks/wagmiGenerated";
 import { useCallback, useState } from "react";
 import { parseEther, formatEther } from "viem";
-import { useAccount } from "wagmi";
+import { useAccount, useSwitchChain } from "wagmi";
 import { waitForTransactionReceipt } from "wagmi/actions";
 import { useForm } from "react-hook-form";
 import { getConfig } from "@/lib/utils/wagmi";
@@ -32,6 +32,7 @@ import {
   HStack,
   Divider,
 } from "@chakra-ui/react";
+import { base } from "viem/chains";
 
 interface BidProps {
   tokenId: bigint;
@@ -62,6 +63,7 @@ export function AuctionBid({
   const account = useAccount();
   const [hasShownToast, setHasShownToast] = useState(false);
   const toast = require("@chakra-ui/react").useToast();
+  const { switchChain } = useSwitchChain()
 
   // Calculate minimum bid: currentBid + (currentBid * increment%)
   const minBidValue = calculateMinBid(
@@ -90,6 +92,8 @@ export function AuctionBid({
       setTxHash(null);
 
       try {
+        switchChain({chainId: base.id})
+
         const txHash = await writeBid({
           address: DAO_ADDRESSES.auction,
           args: [tokenId],
