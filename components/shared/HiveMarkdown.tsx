@@ -94,10 +94,10 @@ const HiveMarkdown: React.FC<HiveMarkdownProps> = ({
   // If there are mentions, process them, else just dangerouslySetInnerHTML
   if (rawHtml.includes("<mention")) {
     return (
-      <div className={className} style={style} suppressHydrationWarning>
+      <div className={className} style={style}>
         {processMentions(rawHtml).map((part, i) =>
           typeof part === "string" ? (
-            <span key={i} dangerouslySetInnerHTML={{ __html: part }} suppressHydrationWarning />
+            <span key={i} dangerouslySetInnerHTML={{ __html: part }} />
           ) : (
             part
           )
@@ -111,7 +111,6 @@ const HiveMarkdown: React.FC<HiveMarkdownProps> = ({
       className={className}
       style={style}
       dangerouslySetInnerHTML={{ __html: rawHtml }}
-      suppressHydrationWarning
     />
   );
 };

@@ -99,7 +99,6 @@ function renderMediaItem(item: MediaItem) {
       return (
         <Box
           dangerouslySetInnerHTML={{ __html: item.content }}
-          suppressHydrationWarning
           sx={{
             iframe: {
               width: "100%",

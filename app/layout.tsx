@@ -133,7 +133,7 @@ export default function RootLayout({
         {/* Force reload of global styles for modal overrides */}
         {/* <style>{`@import url('/app/globals.css');`}</style> */}
       </head>
-      <body className="chakra-ui-dark" suppressHydrationWarning>
+      <body className="chakra-ui-dark">
         <div id="splash-root">
           <div
             style={{
